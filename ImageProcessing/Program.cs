@@ -41,7 +41,8 @@ namespace ImageProcessing
                 if(!exitrequested)
                 {
                     BitmapRenderer renderer = new BitmapRenderer(path);
-                    renderer.Render();
+                    renderer.Run();
+                    
                 }
 
             }

@@ -24,6 +24,10 @@ namespace ImageProcessing
 
         }
 
+        public void Run()
+        {
+
+        }
         public void Render()
         {
             int xin = 0;
@@ -37,16 +41,21 @@ namespace ImageProcessing
             Console.WriteLine("Getting pixel {0},{1}",xin,yin);
             if(inputbitmap != null)
             {
-                byte value = GetPixelValue(xin, yin);
+                float value = GetPixelValue(xin, yin);
                 Console.WriteLine(value);
             }
             Console.ReadKey();
             
         }
 
-        public byte GetPixelValue(int x, int y) 
+        public float GetPixelValue(int x, int y) 
         {
-            return (byte)inputbitmap.GetPixel(x, y).GetBrightness();
+            return inputbitmap.GetPixel(x, y).GetBrightness();
+        }
+
+        private void OutputBitmap(Bitmap image)
+        {
+            image.Save("C://outputfile.bmp");
         }
 
     }
