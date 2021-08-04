@@ -34,13 +34,13 @@ namespace ImageProcessing
                 switch (menuchoice)
                 {
                     case "1":
-                        Render();
+                        GetPixelValue();
                         break;
                     case "2":
-                        InvertColors(new Color());
+                        InvertColors();
                         break;
                     case "3":
-                        OutputBitmap(inputbitmap);
+                        OutputBitmap();
                         break;
                     case "4":
                         Globals.MAIN_REQUESTED = true;
@@ -50,7 +50,9 @@ namespace ImageProcessing
                 }
             }
         }
-        public void Render()
+
+
+        public void GetPixelValue() 
         {
             int xin = 0;
             int yin = 0;
@@ -60,32 +62,33 @@ namespace ImageProcessing
             Console.Write("y value: ");
             Int32.TryParse(Console.ReadLine(), out yin);
 
-            Console.WriteLine("Getting pixel {0},{1}",xin,yin);
+            Console.WriteLine("Getting pixel {0},{1}", xin, yin);
 
-            if(inputbitmap != null)
+            if (inputbitmap != null)
             {
-                byte value = GetPixelValue(xin, yin);
-                inputbitmap.SetPixel(xin, yin, Color.FromArgb(~value, ~value, ~value));
+                byte value = (byte)(inputbitmap.GetPixel(xin, yin).GetBrightness() * 255);
+                //inputbitmap.SetPixel(xin, yin, Color.FromArgb(~value, ~value, ~value));
                 Console.WriteLine(value);
             }
 
-            Console.ReadKey();
-            
         }
 
-
-        public byte GetPixelValue(int x, int y) 
+        public void InvertColors() 
         {
-            return (byte)(inputbitmap.GetPixel(x, y).GetBrightness() * 255);
+            for(int x = 0; x <= inputbitmap.Width; x++)
+            {
+                for(int y = 0; y <= inputbitmap.Height; y++)
+                {
+                    Color pixel = inputbitmap.GetPixel(x, y);
+                    Color newpixel = Color.FromArgb(pixel.ToArgb() ^ 0xffffff);
+                    inputbitmap.SetPixel(x,y,newpixel);
+                    
+                }
+            }
         }
-
-        public Color InvertColors(Color input) 
+        private void OutputBitmap()
         {
-            return Color.FromArgb(input.ToArgb() ^ 0xffffff);
-        }
-        private void OutputBitmap(Bitmap image)
-        {
-            image.Save("C://outputfile.bmp");
+            inputbitmap.Save("C://outputfile.bmp");
         }
     }
 }
