@@ -1,0 +1,9 @@
+﻿===========================
+
+
+Rendering an image!
+Please select what you want to do!
+
+1. Get a pixel
+2. Invert all pixels
+3. Exit

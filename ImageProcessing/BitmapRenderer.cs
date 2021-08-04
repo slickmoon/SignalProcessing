@@ -10,7 +10,7 @@ namespace ImageProcessing
     class BitmapRenderer
     {
         Bitmap inputbitmap;
-
+        string rendertext;
         public BitmapRenderer(string bitmappath)
         {
             try
@@ -21,12 +21,31 @@ namespace ImageProcessing
             catch (Exception e) {
                 Console.WriteLine(e.Message + e.InnerException.Message);    
             }
+            string rendertext = System.IO.File.ReadAllText(@".\Assets\Render.txt");
 
         }
 
         public void Run()
         {
-
+            while (!Globals.MAIN_REQUESTED)
+            {
+                Console.WriteLine(rendertext);
+                string menuchoice = Console.ReadLine();
+                switch (menuchoice)
+                {
+                    case "1":
+                        Render();
+                        break;
+                    case "2":
+                        //invert image function
+                        break;
+                    case "3":
+                        Globals.MAIN_REQUESTED = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         public void Render()
         {
@@ -50,6 +69,7 @@ namespace ImageProcessing
             Console.ReadKey();
             
         }
+
 
         public byte GetPixelValue(int x, int y) 
         {

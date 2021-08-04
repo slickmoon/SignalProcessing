@@ -14,9 +14,9 @@ namespace ImageProcessing
             string bitmappath2 = @".\Assets\einsteinbig.bmp";
             string bitmappath3 = @".\Assets\einsteinangerycat.bmp";
 
-            bool exitrequested = false;
-            while(!exitrequested)
+            while(!Globals.EXIT_REQUESTED)
             {
+                Globals.MAIN_REQUESTED = false;
                 Console.WriteLine(menutext);
                 string menuchoice = Console.ReadLine();
                 string path = "";
@@ -32,17 +32,16 @@ namespace ImageProcessing
                         path = bitmappath3;
                         break;
                     case "4":
-                        exitrequested = true;
+                        Globals.EXIT_REQUESTED = true;
                         break;
                     default: 
                         break;
                 }
 
-                if(!exitrequested)
+                if(!Globals.EXIT_REQUESTED && !Globals.MAIN_REQUESTED)
                 {
                     BitmapRenderer renderer = new BitmapRenderer(path);
                     renderer.Run();
-                    
                 }
 
             }
