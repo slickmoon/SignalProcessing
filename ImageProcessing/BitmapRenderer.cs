@@ -75,9 +75,11 @@ namespace ImageProcessing
 
         public void InvertColors() 
         {
-            for(int x = 0; x <= inputbitmap.Width; x++)
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
+            for (int x = 0; x <= inputbitmap.Width-1; x++)
             {
-                for(int y = 0; y <= inputbitmap.Height; y++)
+                for(int y = 0; y <= inputbitmap.Height-1; y++)
                 {
                     Color pixel = inputbitmap.GetPixel(x, y);
                     Color newpixel = Color.FromArgb(pixel.ToArgb() ^ 0xffffff);
@@ -85,7 +87,12 @@ namespace ImageProcessing
                     
                 }
             }
+
+            watch.Stop();
+
+            Console.WriteLine($"GetPixel Execution Time: {watch.ElapsedMilliseconds} ms");
         }
+
         private void OutputBitmap()
         {
             inputbitmap.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\outputfile.bmp");

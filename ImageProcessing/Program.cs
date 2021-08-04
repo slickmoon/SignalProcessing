@@ -12,7 +12,7 @@ namespace ImageProcessing
             string menutext = System.IO.File.ReadAllText(@".\Assets\Menu.txt");
             string bitmappath1 = @".\Assets\einsteinsmall.bmp";
             string bitmappath2 = @".\Assets\einsteinbig.bmp";
-            string bitmappath3 = @".\Assets\einsteinangerycat.bmp";
+            string bitmappath3 = @".\Assets\angerycat.bmp";
 
             while(!Globals.EXIT_REQUESTED)
             {
