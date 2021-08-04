@@ -6,4 +6,5 @@ Please select what you want to do!
 
 1. Get a pixel
 2. Invert all pixels
-3. Exit
+3. Output file
+4. Exit

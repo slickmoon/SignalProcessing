@@ -21,7 +21,7 @@ namespace ImageProcessing
             catch (Exception e) {
                 Console.WriteLine(e.Message + e.InnerException.Message);    
             }
-            string rendertext = System.IO.File.ReadAllText(@".\Assets\Render.txt");
+            rendertext = System.IO.File.ReadAllText(@".\Assets\Render.txt");
 
         }
 
@@ -37,9 +37,12 @@ namespace ImageProcessing
                         Render();
                         break;
                     case "2":
-                        //invert image function
+                        InvertColors(new Color());
                         break;
                     case "3":
+                        OutputBitmap(inputbitmap);
+                        break;
+                    case "4":
                         Globals.MAIN_REQUESTED = true;
                         break;
                     default:
