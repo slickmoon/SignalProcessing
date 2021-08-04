@@ -88,7 +88,7 @@ namespace ImageProcessing
         }
         private void OutputBitmap()
         {
-            inputbitmap.Save("C://outputfile.bmp");
+            inputbitmap.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\outputfile.bmp");
         }
     }
 }
