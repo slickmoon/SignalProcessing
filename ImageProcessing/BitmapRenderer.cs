@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace ImageProcessing
 {
@@ -94,6 +95,22 @@ namespace ImageProcessing
             watch.Stop();
 
             Console.WriteLine($"GetPixel Execution Time: {watch.ElapsedMilliseconds} ms");
+        }
+
+
+        public void InvertColorsMemoryAccess()
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
+            unsafe
+            {
+                BitmapData bitmapData = inputbitmap.LockBits(new Rectangle(0, 0, inputbitmap.Width, inputbitmap.Height), ImageLockMode.ReadWrite, inputbitmap.PixelFormat);
+            }
+
+
+            watch.Stop();
+
+            Console.WriteLine($"Unsafe direct memory access Execution Time: {watch.ElapsedMilliseconds} ms");
         }
 
         private void OutputBitmap()
