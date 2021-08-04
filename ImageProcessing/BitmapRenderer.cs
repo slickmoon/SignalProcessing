@@ -52,5 +52,9 @@ namespace ImageProcessing
             return (byte)(inputbitmap.GetPixel(x, y).GetBrightness() * 255);
         }
 
+        public Color InvertColors(Color input) 
+        {
+            return Color.FromArgb(input.ToArgb() ^ 0xffffff);
+        }
     }
 }
