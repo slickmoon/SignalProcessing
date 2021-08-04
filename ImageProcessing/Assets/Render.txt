@@ -6,6 +6,6 @@ Please select what you want to do!
 
 1. Get a pixel
 2. Invert all pixels
-3. Invert all pixels (Memory Access)
+3. Invert all pixels with memory access
 4. Output file
 5. Exit

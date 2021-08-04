@@ -105,6 +105,29 @@ namespace ImageProcessing
             unsafe
             {
                 BitmapData bitmapData = inputbitmap.LockBits(new Rectangle(0, 0, inputbitmap.Width, inputbitmap.Height), ImageLockMode.ReadWrite, inputbitmap.PixelFormat);
+                int bytesPerPixel = Bitmap.GetPixelFormatSize(inputbitmap.PixelFormat) / 8;
+                int heightInPixels = bitmapData.Height;
+                int widthInBytes = bitmapData.Width * bytesPerPixel;
+                byte* ptrFirstPixel = (byte*)bitmapData.Scan0;
+
+
+                for (int y = 0; y < heightInPixels - 1; y++)
+                {
+                    byte* currentLine = ptrFirstPixel + (y * bitmapData.Stride);
+                    for (int x = 0; x < widthInBytes; x += bytesPerPixel)
+                    {
+                        int oldBlue = currentLine[x];
+                        int oldGreen = currentLine[x + 1];
+                        int oldRed = currentLine[x + 2];
+
+                        // calculate new pixel value
+                        currentLine[x] = (byte)oldBlue;
+                        currentLine[x + 1] = (byte)oldGreen;
+                        currentLine[x + 2] = (byte)oldRed;
+
+                    }
+                }
+                inputbitmap.UnlockBits(bitmapData);
             }
 
 
