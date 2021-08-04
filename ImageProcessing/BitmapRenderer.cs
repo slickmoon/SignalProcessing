@@ -40,9 +40,12 @@ namespace ImageProcessing
                         InvertColors();
                         break;
                     case "3":
-                        OutputBitmap();
+                        InvertColorsMemoryAccess();
                         break;
                     case "4":
+                        OutputBitmap();
+                        break;
+                    case "5":
                         Globals.MAIN_REQUESTED = true;
                         break;
                     default:
