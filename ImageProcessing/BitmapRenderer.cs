@@ -39,24 +39,25 @@ namespace ImageProcessing
             Int32.TryParse(Console.ReadLine(), out yin);
 
             Console.WriteLine("Getting pixel {0},{1}",xin,yin);
+
             if(inputbitmap != null)
             {
-                float value = GetPixelValue(xin, yin);
+                byte value = GetPixelValue(xin, yin);
+                inputbitmap.SetPixel(xin, yin, Color.FromArgb(~value, ~value, ~value));
                 Console.WriteLine(value);
             }
+
             Console.ReadKey();
             
         }
 
-        public float GetPixelValue(int x, int y) 
+        public byte GetPixelValue(int x, int y) 
         {
-            return inputbitmap.GetPixel(x, y).GetBrightness();
+            return (byte)(inputbitmap.GetPixel(x, y).GetBrightness() * 255);
         }
-
         private void OutputBitmap(Bitmap image)
         {
             image.Save("C://outputfile.bmp");
         }
-
     }
 }
