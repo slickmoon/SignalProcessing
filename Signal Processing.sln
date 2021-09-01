@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signal Processing", "Signal Processing\Signal Processing.csproj", "{1D44F7AA-BD7B-41A8-8F79-B172A721140A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signal Processing", "Signal Processing\Signal Processing.csproj", "{1D44F7AA-BD7B-41A8-8F79-B172A721140A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing", "ImageProcessing\ImageProcessing.csproj", "{602D47F1-D0DA-4695-BB47-ADBB2E7482EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing", "ImageProcessing\ImageProcessing.csproj", "{602D47F1-D0DA-4695-BB47-ADBB2E7482EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioProcessing", "AudioProcessing\AudioProcessing.csproj", "{A90EC808-E264-4671-A256-F58924E82933}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{602D47F1-D0DA-4695-BB47-ADBB2E7482EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{602D47F1-D0DA-4695-BB47-ADBB2E7482EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{602D47F1-D0DA-4695-BB47-ADBB2E7482EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A90EC808-E264-4671-A256-F58924E82933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A90EC808-E264-4671-A256-F58924E82933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A90EC808-E264-4671-A256-F58924E82933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A90EC808-E264-4671-A256-F58924E82933}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
