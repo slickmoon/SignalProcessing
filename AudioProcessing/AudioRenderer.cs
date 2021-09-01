@@ -55,7 +55,7 @@ namespace AudioProcessing
                 float f = GetPointRelative(currentsamplepos);
                 //Write the 4 bytes of this float sample
                 byte[] currentsamplebytes = BitConverter.GetBytes(f);
-                //currentsamplebytes = BitConverter.GetBytes(0.5f);
+
                 ulong bytelength = (ulong)currentsamplebytes.Length;
 
                 //Add each byte to the array of output bytes
