@@ -20,7 +20,7 @@ namespace AudioProcessing
             {
                 Console.WriteLine(render.GetPointRelative((float)i));
             }
-           
+            byte[] wave = render.GetWaveformBytes(8000,1);
             //Console.WriteLine("Press any key to exit.");
             //Console.ReadKey();
 
