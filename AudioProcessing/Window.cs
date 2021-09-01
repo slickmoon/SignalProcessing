@@ -11,6 +11,7 @@ namespace AudioProcessing
 
         public Window()
         {
+            
             Show();
             Graphics = CreateGraphics();
             Buffer = BufferedGraphicsManager.Current.Allocate(Graphics, new Rectangle(0, 0, Width, Height));
