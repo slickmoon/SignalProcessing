@@ -45,22 +45,22 @@ namespace AudioProcessing
         // TODO: change lengthsecs to lengthmillisecs
         public byte[] GetWaveformBytes (ulong samplerate, ulong lengthsecs = 1)
         {
-            byte[] output = new byte[samplerate*lengthsecs];
-            ulong totalsamples = samplerate * lengthsecs;
+            ulong totalsamples = (samplerate * lengthsecs)+1;
+            byte[] output = new byte[totalsamples*sizeof(float)];
 
-            for(ulong i = 1; i < totalsamples+1; i++)
+
+            for(ulong i = 0; i < totalsamples; i++)
             {
                 //Write the 4 bytes of this float sample
-                byte[] currentsamplebytes = BitConverter.GetBytes(GetPointRelative((lengthsecs / samplerate) * i-1));
+                byte[] currentsamplebytes = BitConverter.GetBytes(GetPointRelative((lengthsecs / samplerate) * i));
 
                 ulong bytelength = (ulong)currentsamplebytes.Length;
 
                 //Add each byte to the array of output bytes
                 for (ulong j = 0; j < (ulong)currentsamplebytes.Length; j++)
                 {
-                    output[(i * bytelength) + j] = currentsamplebytes[j];
+                    output[(i*sizeof(float)) + j] = currentsamplebytes[j];
                 }
-                //output[i] = (byte)
             }
 
             return output;
