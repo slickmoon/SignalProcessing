@@ -13,10 +13,12 @@ namespace AudioProcessing
         [STAThread]
         static void Main()
         {
-            SaveFileDialog s = new SaveFileDialog();
-            while (s.ShowDialog() == DialogResult.Yes)
-            {
-            }
+            //SaveFileDialog s = new SaveFileDialog();
+            //while (s.ShowDialog() == DialogResult.Yes)
+            //{
+            //}
+            AudioRenderer renderer = new AudioRenderer(4000);
+            renderer.GetWaveformBytes(8000,1);
 
         }
     }
