@@ -10,10 +10,13 @@ namespace AudioProcessing
 {
     class Program
     {
-
+        [STAThread]
         static void Main()
         {
-
+            SaveFileDialog s = new SaveFileDialog();
+            while (s.ShowDialog() == DialogResult.Yes)
+            {
+            }
 
         }
     }
