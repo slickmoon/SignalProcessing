@@ -18,7 +18,11 @@ namespace AudioProcessing
             //{
             //}
             AudioRenderer renderer = new AudioRenderer(4000);
-            renderer.GetWaveformBytes(8000,1);
+            byte[] output = renderer.GetWaveformBytes(8000,1);
+            Console.Write("Done");
+            while (true)
+            {
+            }
 
         }
     }

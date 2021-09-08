@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,31 +43,25 @@ namespace AudioProcessing
             return (float)Math.Sin((angFrequency * t) + Phase); ;
         }
 
-        // TODO: change lengthsecs to lengthmillisecs
-        public byte[] GetWaveformBytes (ulong samplerate, ulong lengthsecs = 1)
+        public byte[] GetWaveformBytes(ulong samplerate, ulong length)
         {
-            ulong totalsamples = (samplerate * lengthsecs)+1;
-            byte[] output = new byte[totalsamples*sizeof(float)];
+            ulong totalsamples = samplerate * length * 1000;
+            byte[] output = new byte[totalsamples * sizeof(float)];
 
 
-            for(ulong i = 0; i < totalsamples; i++)
+            for (ulong i = 0; i < totalsamples; i++)
             {
-                float currentsamplepos = ((float)lengthsecs / (float)samplerate) * (float)i;
-                float f = GetPointRelative(currentsamplepos);
                 //Write the 4 bytes of this float sample
-                byte[] currentsamplebytes = BitConverter.GetBytes(f);
-                //currentsamplebytes = BitConverter.GetBytes(0.5f);
-                ulong bytelength = (ulong)currentsamplebytes.Length;
+                byte[] currentsamplebytes = BitConverter.GetBytes(GetPointRelative(length / samplerate * i));
 
                 //Add each byte to the array of output bytes
-                for (ulong j = 0; j < (ulong)currentsamplebytes.Length; j++)
+                for (ulong j = 0; j < sizeof(float); j++)
                 {
-                    output[(i*sizeof(float)) + j] = currentsamplebytes[j];
+                    output[i * sizeof(float) + j] = currentsamplebytes[j];
                 }
             }
 
             return output;
         }
-
     }
 }
