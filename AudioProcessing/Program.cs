@@ -17,13 +17,43 @@ namespace AudioProcessing
             //while (s.ShowDialog() == DialogResult.Yes)
             //{
             //}
-            AudioRenderer renderer = new AudioRenderer(4000);
-            byte[] output = renderer.GetWaveformBytes(8000,1);
-            Console.Write("Done");
-            while (true)
+            
+            byte[] wavebytes = ReadWav("D:\\untitled.wav");
+            
+            foreach(byte b in wavebytes)
             {
+                Console.WriteLine("\n{0}: char = {1}",b.ToString(),(char) b);
+                Console.ReadKey();
             }
+            
+            
+            AudioRenderer renderer = new AudioRenderer(4000);
+            byte[] waveformbytes = renderer.GetWaveformBytes(8000,1);
 
+
+            //Generate WAV file
+            WriteWav(waveformbytes, "d:\\output.wav");
+
+            Console.ReadKey();
+
+        }
+
+        private static void WriteWav(byte[] pcmbytes,string filepath)
+        {
+            //write header
+            string header = "";
+            header += "RIFF";
+            foreach(byte b in header)
+            {
+                Console.WriteLine("\n{0}", b.ToString());
+                Console.ReadKey();
+            }
+        }
+
+
+        private static byte[] ReadWav(string filepath)
+        { 
+            return System.IO.File.ReadAllBytes(filepath);
         }
     }
 }
