@@ -7,44 +7,60 @@ using System.Threading.Tasks;
 
 namespace AudioProcessing
 {
-    class WaveAudio : IAudio
-    {
-        public FileStream fs { get; set; }
-        public BinaryWriter bw { get; set; }
+    class WaveAudio : AudioFile
+    { 
+        const byte HeaderSize = 8;
 
-        public uint numsamples { get; set; }
-        public ushort numchannels { get; set; }
-        public ushort samplelength { get; set; }
-        public uint samplerate { get; set; }
-
-        public WaveAudio(string file)
+        /// <summary>
+        /// WAVE Stream
+        /// </summary>
+        /// <param name="stream"></param>
+        public WaveAudio(Stream stream) : base(stream)
         {
-            fs = new FileStream(file, FileMode.Create);
-            bw = new BinaryWriter(fs);
-
-            numsamples = 8000;//44100;
-            numchannels = 1;
-            samplelength = 1;
-            samplerate = 4000;
+            WriteHeader();
         }
 
-        public void CreateHeaders()
+        public void WriteHeader()
         {
-            // Master RIFF chunk
-            bw.Write(Encoding.ASCII.GetBytes("RIFF"));
-            bw.Write(36 + numsamples * numchannels * samplelength);
-            bw.Write(Encoding.ASCII.GetBytes("WAVE"));
-            // Sub chunk
-            bw.Write(Encoding.ASCII.GetBytes("fmt "));
-            bw.Write(16);
-            bw.Write((ushort)1);
-            bw.Write(numchannels);
-            bw.Write(samplerate);
-            bw.Write(samplerate * samplelength * numchannels);
-            bw.Write(samplelength * numchannels);
-            bw.Write((ushort)(8 * samplelength));
-            bw.Write("data");
-            bw.Write(numsamples * samplelength);
+            UInt16 frequency = 650;
+            int msDuration = 1000;
+            UInt16 volume = 16383;
+
+            int formatChunkSize = 16;
+            short formatType = 1;
+            short tracks = 1;
+            int samplesPerSecond = 44100;
+            short bitsPerSample = 16;
+            short frameSize = (short)(tracks * ((bitsPerSample + 7) / 8));
+            int bytesPerSecond = samplesPerSecond * frameSize;
+            int waveSize = 4;
+            int samples = (int)((decimal)samplesPerSecond * msDuration / 1000);
+            int dataChunkSize = samples * frameSize;
+            int fileSize = waveSize + HeaderSize + formatChunkSize + HeaderSize + dataChunkSize;
+
+            Bin.Write(0x46464952); //RIFF
+            Bin.Write(fileSize);
+            Bin.Write(0x45564157); //WAVE
+            Bin.Write(0x20746D66); //fmt
+            Bin.Write(formatChunkSize);
+            Bin.Write(formatType);
+            Bin.Write(tracks);
+            Bin.Write(samplesPerSecond);
+            Bin.Write(bytesPerSecond);
+            Bin.Write(frameSize);
+            Bin.Write(bitsPerSample);
+            Bin.Write(0x61746164); //data
+            Bin.Write(dataChunkSize);
+
+            //not supposed to be here
+            double theta = frequency * Math.Constants.Pi2 / (double)samplesPerSecond;
+            // 'volume' is UInt16 with range 0 thru Uint16.MaxValue ( = 65 535)
+            // we need 'amp' to have the range of 0 thru Int16.MaxValue ( = 32 767)
+            double amp = volume >> 2; // so we simply set amp = volume / 2
+            for (int step = 0; step < samples; step++)
+            {
+                Bin.Write((short)(amp * System.Math.Sin(theta * (double)step)));
+            }
         }
     }
 }

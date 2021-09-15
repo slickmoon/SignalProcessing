@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace AudioProcessing
 {
-    interface IAudio
+    public class AudioFile
     {
-        FileStream fs { get; set; }
-        BinaryWriter bw { get; set; }
+        public BinaryWriter Bin;
+        public Stream Stream;
 
-        uint numsamples { get; set; }
-        ushort numchannels { get; set; }
-        ushort samplelength { get; set; }
-        uint samplerate { get; set; }
-
-        void CreateHeaders();
+        public AudioFile(Stream stream)
+        {
+            Stream = stream;
+            Bin = new BinaryWriter(stream);
+        }
     }
 }

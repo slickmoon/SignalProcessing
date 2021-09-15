@@ -51,6 +51,7 @@
     <Compile Include="AudioFiles\AudioFile.cs" />
     <Compile Include="AudioRenderer.cs" />
     <Compile Include="AudioFiles\MPEGAudio.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AudioFiles\WaveAudio.cs" />
