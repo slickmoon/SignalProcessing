@@ -52,6 +52,7 @@
     <Compile Include="AudioRenderers\RendererBase.cs" />
     <Compile Include="AudioRenderers\SineRenderer.cs" />
     <Compile Include="AudioFiles\MPEGAudio.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AudioFiles\WaveAudio.cs" />
