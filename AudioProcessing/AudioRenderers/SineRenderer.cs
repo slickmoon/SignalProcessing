@@ -7,28 +7,19 @@ using System.Threading.Tasks;
 
 namespace AudioProcessing
 {
-    class AudioRenderer
+    class SineRenderer : RendererBase
     {
-        private float Frequency = 300f;
-        private float Amplitude = 1f;
-        private float Phase = 0f;
-        private float Offset = 0f;
-        private float Invert = 1;
 
-        //for overriding properties of the waveform
-        public AudioRenderer(float f, float a = 1f, float p = 0f, float o = 0f, float i = 1f)
+        public SineRenderer(float f, float a = 1f, float p = 0f, float o = 0f, float i = 1f) : base (f,a,p,o,i)
         {
-            Frequency = f;
-            Amplitude = a;
-            Phase = p;
-            Offset = o;
-            Invert = i;
+            
         }
 
-        public AudioRenderer()
-        { }
+        public SineRenderer() : base ()
+        { 
+        }
         
-        public float GetPoint(float t)
+        public override float GetPoint(float t)
         {
             float output = 0f;
             float angFrequency = 2 * (float)Math.PI * Frequency;
@@ -36,14 +27,14 @@ namespace AudioProcessing
 
             return output;
         }
-        public float GetPointRelative(float t)
+        public override float GetPointRelative(float t)
         {
             float angFrequency = 2 * (float)Math.PI * Frequency;
 
             return (float)Math.Sin((angFrequency * t) + Phase); ;
         }
 
-        public byte[] GetWaveformBytes(ulong samplerate, ulong length)
+        public override byte[] GetWaveformBytes(ulong samplerate, ulong length)
         {
             ulong totalsamples = samplerate * length * 1000;
             byte[] output = new byte[totalsamples * sizeof(float)];

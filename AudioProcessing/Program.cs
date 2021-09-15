@@ -27,7 +27,7 @@ namespace AudioProcessing
             }
             
             
-            AudioRenderer renderer = new AudioRenderer(4000);
+            SineRenderer renderer = new SineRenderer(4000);
             byte[] waveformbytes = renderer.GetWaveformBytes(8000,1);
 
 
