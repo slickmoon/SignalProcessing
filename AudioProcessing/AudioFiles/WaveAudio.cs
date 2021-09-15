@@ -30,9 +30,12 @@ namespace AudioProcessing
 
         public void CreateHeaders()
         {
+            // Master RIFF chunk
             bw.Write(Encoding.ASCII.GetBytes("RIFF"));
             bw.Write(36 + numsamples * numchannels * samplelength);
-            bw.Write(Encoding.ASCII.GetBytes("WAVEfmt "));
+            bw.Write(Encoding.ASCII.GetBytes("WAVE"));
+            // Sub chunk
+            bw.Write(Encoding.ASCII.GetBytes("fmt "));
             bw.Write(16);
             bw.Write((ushort)1);
             bw.Write(numchannels);

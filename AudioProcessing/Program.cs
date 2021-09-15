@@ -18,7 +18,7 @@ namespace AudioProcessing
             //{
             //}
             
-            byte[] wavebytes = ReadWav("D:\\untitled.wav");
+            byte[] wavebytes = ReadWav(@".\data\sine.wav");
             
             foreach(byte b in wavebytes)
             {
@@ -32,23 +32,28 @@ namespace AudioProcessing
 
 
             //Generate WAV file
-            WriteWav(waveformbytes, "d:\\output.wav");
+            //WriteWav(waveformbytes, "d:\\output.wav");
 
             Console.ReadKey();
 
         }
 
-        private static void WriteWav(byte[] pcmbytes,string filepath)
+        /*private static void WriteWav(byte[] pcmbytes,string filepath)
         {
             //write header
             string header = "";
             header += "RIFF";
+            header += 
+
+
+
             foreach(byte b in header)
             {
                 Console.WriteLine("\n{0}", b.ToString());
                 Console.ReadKey();
             }
         }
+        */
 
 
         private static byte[] ReadWav(string filepath)
